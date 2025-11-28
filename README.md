@@ -2,68 +2,73 @@
 
 A fully functional, dynamic online shopping website built with HTML, CSS (Bootstrap 5 + Material Design), and JavaScript. This project uses LocalStorage to simulate a backend database for user authentication, product management, and cart functionality.
 
-## Features
+## 📄 Page Explanations
 
-### User Features
-*   **User Authentication**: Secure Login and Registration pages with validation.
-*   **Browse Products**: View available products in the Shop page with a responsive grid layout.
-*   **Shopping Cart**: Add items to cart, update quantities, and remove items. Real-time total price calculation.
-*   **Responsive Design**: Optimized for mobile, tablet, and desktop devices using Bootstrap 5.
-*   **Interactive UI**: Enhanced with Material Design components, including cards, buttons, inputs, and snackbar notifications.
+*   **Home Page (`index.html`)**: The landing page featuring a responsive navbar, a hero section with a "Start Shopping" call-to-action, and a "Featured Categories" section displaying product categories (Electronics, Fashion, Home & Living).
+*   **Shop Page (`shop.html`)**: Displays all available products in a responsive grid layout. Users can view product details and add items to their cart. Admin users see additional "Edit" and "Delete" buttons for each product.
+*   **Cart Page (`cart.html`)**: Shows selected items, allows users to increase/decrease quantities or remove items, and calculates the total price dynamically.
+*   **Login Page (`login.html`)**: Allows users to sign in. Validates credentials against stored users.
+*   **Register Page (`register.html`)**: Allows new users to create an account. Includes validation for email format, password length, and password matching.
+*   **Add Product Page (`add-product.html`)**: *Admin Only*. A form to create new products with name, price, description, and image URL.
+*   **Edit Product Page (`edit-product.html`)**: *Admin Only*. A form pre-filled with existing product data to update details.
 
-### Admin Features
-*   **Admin Access**: Special access for admin users (Email: `admin@gmail.com`).
-*   **Product Management (CRUD)**:
-    *   **Create**: Add new products with image, description, and price.
-    *   **Read**: View all products in the shop.
-    *   **Update**: Edit existing product details.
-    *   **Delete**: Remove products from the store.
+## 🛠️ CRUD Operations
 
-## Technologies Used
+The application performs Create, Read, Update, and Delete (CRUD) operations using browser **LocalStorage**:
 
-*   **HTML5**: Semantic structure of the web pages.
-*   **CSS3**: Styling and layout.
-    *   **Bootstrap 5**: Responsive grid system and components.
-    *   **MDB (Material Design for Bootstrap)**: Material Design UI elements.
-*   **JavaScript (ES6+)**: Core logic for interactivity and data management.
-    *   **LocalStorage**: Used as a client-side database to persist Users, Products, and Cart data.
+*   **Create**:
+    *   **Users**: New user objects are created and stored in the `users` array upon registration.
+    *   **Products**: Admins can create new product objects which are pushed to the `products` array.
+*   **Read**:
+    *   **Products**: The Shop page reads and displays the `products` array.
+    *   **Cart**: The Cart page reads the `cart` array and cross-references it with `products` to display details.
+    *   **Auth**: Login checks against the `users` array to verify credentials.
+*   **Update**:
+    *   **Products**: Admins can modify existing product details. The specific object in the `products` array is found by ID and updated.
+    *   **Cart**: Users can update the quantity of items in their cart.
+*   **Delete**:
+    *   **Products**: Admins can remove a product. The item is filtered out of the `products` array.
+    *   **Cart**: Users can remove items from their cart.
 
-## Installation & Usage
+## 🎨 UI Components Used
 
-1.  **Clone the repository**:
-    ```bash
-    git clone <repository-url>
-    ```
-2.  **Open the project**:
-    Navigate to the project folder and open `index.html` in your web browser.
+### Bootstrap 5 Elements
+*   **Navbar**: Responsive navigation bar with toggle button for mobile views.
+*   **Grid System**: Used extensively (rows and columns) for layout responsiveness.
+*   **Cards**: Used for displaying products and categories.
+*   **Forms**: Form controls and layout structure.
+*   **Utilities**: Spacing (margin/padding), text alignment, and display utilities.
 
-## How to Use
+### Material Design (MDB) Components
+*   **Material Inputs**: Floating labels and animated input fields (`form-outline`).
+*   **Material Buttons**: Ripple effect buttons with shadow depth.
+*   **Cards**: Enhanced cards with shadow effects (`shadow-sm`, `shadow-lg`).
+*   **Snackbars/Toasts**: Used for success/error notifications during login and registration.
 
-### 1. Registration & Login
-*   Open the website and navigate to the **Login** page.
-*   Click **Register** to create a new account.
-*   Login with your credentials.
+## 🔐 Login & Registration Workflow
 
-### 2. Admin Access
-*   To access Admin features (Add/Edit/Delete products), login with the following credentials:
-    *   **Email**: `admin@gmail.com`
-    *   **Password**: `admin123` (or any valid password)
+1.  **Registration**:
+    *   User enters Name, Email, Password, and Confirm Password.
+    *   **Validation**:
+        *   Email must be valid regex format.
+        *   Password must be ≥ 6 characters.
+        *   Passwords must match.
+        *   Email must not already exist in `users` LocalStorage.
+    *   **Success**: User is added to `users` array and redirected to Login.
 
-### 3. Shopping
-*   Browse products on the **Shop** page.
-*   Click **Add to Cart** to add items.
-*   Go to the **Cart** page to manage your items and view the total cost.
+2.  **Login**:
+    *   User enters Email and Password.
+    *   **Validation**: Checks if email/password combination exists in `users` array.
+    *   **Success**:
+        *   `loggedInUser` is saved to LocalStorage (email string).
+        *   User is redirected to Home page.
+    *   **Admin Access**: If the email is `admin@gmail.com`, the user is granted access to "Add Product", "Edit", and "Delete" features.
 
-## Project Structure
+3.  **Logout**:
+    *   `loggedInUser` is removed from LocalStorage.
+    *   User is redirected to the Login page.
 
-*   `index.html`: Landing page with featured categories.
-*   `shop.html`: Product listing page.
-*   `cart.html`: Shopping cart page.
-*   `login.html` / `register.html`: Authentication pages.
-*   `add-product.html` / `edit-product.html`: Admin pages for product management.
-*   `js/`: Contains JavaScript files (`auth.js`, `products.js`, `cart.js`).
-*   `css/`: Contains custom styles.
+## 👤 Admin Credentials
 
-## License
-
-This project is for educational purposes.
+*   **Email**: `admin@gmail.com`
+*   **Password**: `admin123`
