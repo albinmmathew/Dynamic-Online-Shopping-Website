@@ -14,56 +14,21 @@
 
 <body class="bg-light">
 
-    <div class="container mt-5">
-        <div class="card shadow p-4 mx-auto" style="max-width: 450px;">
-            <h3 class="text-center mb-4">Create Account</h3>
+    </p>
+    </form>
+    </div>
 
-            <form id="registerForm">
-
-                <!-- Name -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" id="name" class="form-control" required />
-                    <label class="form-label" for="name">Full Name</label>
-                </div>
-
-                <!-- Email -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="email" id="email" class="form-control" required />
-                    <label class="form-label" for="email">Email</label>
-                </div>
-
-                <!-- Password -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="password" class="form-control" required />
-                    <label class="form-label" for="password">Password (min 6 chars)</label>
-                </div>
-
-                <!-- Confirm Password -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="confirmPassword" class="form-control" required />
-                    <label class="form-label" for="confirmPassword">Confirm Password</label>
-                </div>
-
-                <button class="btn btn-primary w-100" type="submit">Register</button>
-
-                <p class="text-center mt-3">
-                    Already have an account? <a href="login.html">Login</a>
-                </p>
-            </form>
-        </div>
-
-        <!-- Snackbar -->
-        <div id="snackbar"
-            class="toast align-items-center text-white bg-primary border-0 position-fixed bottom-0 end-0 m-3"
-            role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body" id="snackbarMessage">
-                    Hello, world! This is a toast message.
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close"></button>
+    <!-- Snackbar -->
+    <div id="snackbar" class="toast align-items-center text-white bg-primary border-0 position-fixed bottom-0 end-0 m-3"
+        role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body" id="snackbarMessage">
+                Hello, world! This is a toast message.
             </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
         </div>
+    </div>
     </div>
 
     <!-- MDB + Bootstrap JS -->
