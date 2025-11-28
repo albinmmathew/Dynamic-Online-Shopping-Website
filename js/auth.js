@@ -43,3 +43,35 @@ if (document.getElementById("registerForm")) {
         window.location.href = "login.html";
     });
 }
+
+
+
+
+// LOGIN
+if (document.getElementById("loginForm")) {
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let email = document.getElementById("loginEmail").value.trim();
+        let password = document.getElementById("loginPassword").value;
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Find matching user
+        let validUser = users.find(u => u.email === email && u.password === password);
+
+        if (!validUser) {
+            alert("Invalid Email or Password!");
+            return;
+        }
+
+        // Save login session
+        localStorage.setItem("loggedInUser", JSON.stringify(validUser));
+
+        alert("Login successful!");
+
+        // Redirect to home page
+        window.location.href = "index.html";
+    });
+}
