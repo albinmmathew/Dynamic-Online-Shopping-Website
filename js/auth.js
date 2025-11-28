@@ -62,9 +62,11 @@ if (document.getElementById("loginForm")) {
         let validUser = users.find(u => u.email === email && u.password === password);
 
         if (!validUser) {
-            alert("Invalid Email or Password!");
-            return;
-        }
+			document.getElementById("loginError").innerHTML =
+				"Invalid email or password. <a href='register.html'>Create an account?</a>";
+			return;
+		}
+				
 
         // Save login session
         localStorage.setItem("loggedInUser", JSON.stringify(validUser));
