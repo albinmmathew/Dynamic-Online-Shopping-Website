@@ -60,47 +60,9 @@
     <!-- CATEGORIES / OFFERS -->
     <div class="container py-5">
         <h2 class="text-center fw-bold mb-4">Featured Collections</h2>
-        <div class="row g-4">
-
-            <!-- Category 1 -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-white shadow-lg border-0">
-                    <img src="https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?q=80&w=1000&auto=format&fit=crop"
-                        class="card-img" style="height: 250px; object-fit: cover; opacity: 0.6;">
-                    <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
-                        <h3 class="card-title fw-bold">Guitars</h3>
-                        <p class="card-text">Acoustic, Electric & Bass</p>
-                        <a href="shop.html" class="btn btn-outline-light btn-sm">Explore</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category 2 -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-white shadow-lg border-0">
-                    <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=1000&auto=format&fit=crop"
-                        class="card-img" style="height: 250px; object-fit: cover; opacity: 0.6;">
-                    <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
-                        <h3 class="card-title fw-bold">Pianos & Keys</h3>
-                        <p class="card-text">Synthesizers & Digital Pianos</p>
-                        <a href="shop.html" class="btn btn-outline-light btn-sm">Explore</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category 3 -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-white shadow-lg border-0">
-                    <img src="https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=1000&auto=format&fit=crop"
-                        class="card-img" style="height: 250px; object-fit: cover; opacity: 0.6;">
-                    <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
-                        <h3 class="card-title fw-bold">Drums</h3>
-                        <p class="card-text">Acoustic Kits & Percussion</p>
-                        <a href="shop.html" class="btn btn-outline-light btn-sm">Explore</a>
-                    </div>
-                </div>
-            </div>
-
+        <div class="row g-4" id="featuredCategories">
+            <!-- Categories will be loaded dynamically -->
+            <p class="text-center text-muted">Loading categories...</p>
         </div>
     </div>
 
@@ -132,6 +94,52 @@
             localStorage.removeItem("loggedInUser");
             window.location.href = "login.html";
         });
+
+        // ----------------------------------------------------
+        // DYNAMIC CATEGORIES RENDERING
+        // ----------------------------------------------------
+        function renderCategories() {
+            const products = JSON.parse(localStorage.getItem("products")) || [];
+            const categoryContainer = document.getElementById("featuredCategories");
+
+            // Extract unique categories
+            const categories = [...new Set(products.map(p => p.category).filter(c => c))];
+
+            if (categories.length === 0) {
+                categoryContainer.innerHTML = `
+                    <div class="col-12 text-center">
+                        <p class="text-muted">No categories found. Add products to see them here!</p>
+                        <a href="shop.html" class="btn btn-outline-primary">Browse All Products</a>
+                    </div>
+                `;
+                return;
+            }
+
+            categoryContainer.innerHTML = ""; // Clear loading text
+
+            categories.forEach(category => {
+                // Find the first product in this category to use its image
+                const representativeProduct = products.find(p => p.category === category);
+                const image = representativeProduct ? representativeProduct.image : 'https://via.placeholder.com/300';
+
+                const col = document.createElement("div");
+                col.className = "col-md-4";
+                col.innerHTML = `
+                    <div class="card bg-dark text-white shadow-lg border-0">
+                        <img src="${image}" class="card-img" style="height: 250px; object-fit: cover; opacity: 0.6;" alt="${category}">
+                        <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
+                            <h3 class="card-title fw-bold">${category}</h3>
+                            <p class="card-text">Explore our collection</p>
+                            <a href="shop.html" class="btn btn-outline-light btn-sm">View Products</a>
+                        </div>
+                    </div>
+                `;
+                categoryContainer.appendChild(col);
+            });
+        }
+
+        // Run on load
+        renderCategories();
     </script>
 
 </body>

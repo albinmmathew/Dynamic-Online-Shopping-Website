@@ -82,6 +82,7 @@ if (window.location.pathname.includes("add-product.html")) {
         e.preventDefault();
 
         let name = document.getElementById("name").value.trim();
+        let category = document.getElementById("category").value;
         let price = document.getElementById("price").value.trim();
         let description = document.getElementById("description").value.trim();
         let image = document.getElementById("image").value.trim();
@@ -91,6 +92,7 @@ if (window.location.pathname.includes("add-product.html")) {
         let newProduct = {
             id: Date.now(),
             name,
+            category,
             price,
             description,
             image
@@ -122,6 +124,7 @@ if (window.location.pathname.includes("edit-product.html")) {
         window.location.href = "shop.html";
     } else {
         document.getElementById("name").value = product.name;
+        document.getElementById("category").value = product.category || "";
         document.getElementById("price").value = product.price;
         document.getElementById("description").value = product.description;
         document.getElementById("image").value = product.image;
@@ -131,6 +134,7 @@ if (window.location.pathname.includes("edit-product.html")) {
         e.preventDefault();
 
         product.name = document.getElementById("name").value.trim();
+        product.category = document.getElementById("category").value;
         product.price = document.getElementById("price").value.trim();
         product.description = document.getElementById("description").value.trim();
         product.image = document.getElementById("image").value.trim();

@@ -62,6 +62,19 @@
                     <label class="form-label" for="name">Product Name</label>
                 </div>
 
+                <!-- Category -->
+                <div class="mb-4">
+                    <label class="form-label" for="category">Category</label>
+                    <select class="form-select" id="category" required>
+                        <option value="" disabled selected>Select a Category</option>
+                        <option value="Guitars">Guitars</option>
+                        <option value="Pianos & Keys">Pianos & Keys</option>
+                        <option value="Drums">Drums</option>
+                        <option value="Wind Instruments">Wind Instruments</option>
+                        <option value="Accessories">Accessories</option>
+                    </select>
+                </div>
+
                 <!-- Price -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <input type="number" id="price" class="form-control" required />
