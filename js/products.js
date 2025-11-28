@@ -7,9 +7,66 @@ function checkLogin() {
     return loggedUserEmail;
 }
 
+// Default Products Data
+const defaultProducts = [
+    {
+        id: 1764316444585,
+        name: "Yamaha PSR-SX900",
+        price: "146000",
+        category: "Pianos & Keys",
+        description: "Take your performance to a whole new dimension with the PSR-SX. Replacing the hugely successful PSR-S series, the PSR-SX900 is the new generation in Digital Workstation sound, design and user experience. These instruments will inspire and intensify your musical performance and enjoyment.\n\n1337 Voices, including 252 Super Articulation Voices, 24 Organ Flutes! Voices. 56 Drum/SFX kits\n525 Styles, including 463 Pro Styles, 46 Session Styles, 10 DJ Styles and 6 Freeplay Styles",
+        image: "https://in.yamaha.com/en/files/sx900_main_tcm142-1696528.png?impolicy=resize&imwid=735&imhei=735"
+    },
+    {
+        id: 1764316695463,
+        name: "Yamaha PSR-SX700",
+        price: "850000",
+        category: "Pianos & Keys",
+        description: "Take your performance to a whole new dimension with the PSR-SX. Replacing the hugely successful PSR-S series, the PSR-SX700 is the new generation in Digital Workstation sound, design and user experience. These instruments will inspire and intensify your musical performance and enjoyment. 986 Voices, including 131 Super Articulation voices and 24 Organ flutes. 41 Drum/SFX kits\n400 Styles, including 353 Pro Styles, 34 Session Styles, 10 DJ styles and 3 Free Play",
+        image: "https://in.yamaha.com/en/files/sx700_main_tcm142-1730976.png?impolicy=resize&imwid=735&imhei=735"
+    },
+    {
+        id: 1764320639934,
+        name: "Yamaha CG142S Classical Guitar",
+        price: "27000",
+        category: "Guitars",
+        description: "Highlights\nYamaha CG Shape\nSolid Spruce Top\nNato Back & Sides\nNato Neck\nRosewood Fingerboard",
+        image: "https://yamahamusicstore.in/products-images/enlarge-image/WU15820.jpg?v=1764320615"
+    },
+    {
+        id: 1764320842849,
+        name: "Ortega RCE125SN",
+        price: "280000",
+        category: "Guitars",
+        description: "ORT-RCE125SN",
+        image: "https://www.bajaao.com/cdn/shop/files/ORT-RCE125SN.jpg?v=1725864849&width=1000"
+    }
+];
+
 // Get Products
 function getProducts() {
-    return JSON.parse(localStorage.getItem("products")) || [];
+    let products = JSON.parse(localStorage.getItem("products"));
+
+    // Seed default products if storage is empty
+    if (!products || products.length === 0) {
+        products = defaultProducts;
+        localStorage.setItem("products", JSON.stringify(products));
+    } else {
+        // Optional: Ensure default products exist (merge if missing)
+        // This ensures the user sees them even if they have other products
+        let hasDefaults = defaultProducts.every(def => products.some(p => p.id === def.id));
+        if (!hasDefaults) {
+            // Add missing defaults
+            defaultProducts.forEach(def => {
+                if (!products.some(p => p.id === def.id)) {
+                    products.push(def);
+                }
+            });
+            localStorage.setItem("products", JSON.stringify(products));
+        }
+    }
+
+    return products;
 }
 
 // Save Products
