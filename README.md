@@ -2,6 +2,8 @@
 
 A fully functional, dynamic online shopping website built with HTML, CSS (Bootstrap 5 + Material Design), and JavaScript. This project uses LocalStorage to simulate a backend database for user authentication, product management, and cart functionality.
 
+URL : https://albinmmathew.github.io/Dynamic-Online-Shopping-Website/
+
 ## 📄 Page Explanations
 
 *   **Home Page (`index.html`)**: The landing page featuring a responsive navbar, a hero section with a "Start Shopping" call-to-action, and a "Featured Categories" section displaying product categories (Electronics, Fashion, Home & Living).
