@@ -109,15 +109,15 @@ if (document.getElementById("loginForm")) {
         let users = JSON.parse(localStorage.getItem("users")) || [];
 
         // Find matching user
-        let validUser = users.find(u => u.email === email && u.password === password);
+        let validUser = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
 
         if (!validUser) {
             showSnackbar("Invalid credentials", "error");
             return;
         }
 
-        // Save login session (Email only as per requirement)
-        localStorage.setItem("loggedInUser", email);
+        // Save login session (Use the email from the record to ensure case matches admin checks)
+        localStorage.setItem("loggedInUser", validUser.email);
 
         showSnackbar("Login successful! Redirecting...", "success");
 
