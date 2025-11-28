@@ -2,7 +2,7 @@
 function showSnackbar(message, type = "success") {
     const snackbar = document.getElementById("snackbar");
     const snackbarMessage = document.getElementById("snackbarMessage");
-    
+
     // Set color based on type
     if (type === "error") {
         snackbar.classList.remove("bg-primary");
@@ -13,7 +13,7 @@ function showSnackbar(message, type = "success") {
     }
 
     snackbarMessage.textContent = message;
-    
+
     // Show toast using Bootstrap API
     const toast = new bootstrap.Toast(snackbar);
     toast.show();
@@ -21,6 +21,19 @@ function showSnackbar(message, type = "success") {
 
 // Get existing users or set empty array
 let users = JSON.parse(localStorage.getItem("users")) || [];
+
+// Seed Admin User
+const adminUser = {
+    id: 0,
+    name: "Admin",
+    email: "admin@gmail.com",
+    password: "admin123"
+};
+
+if (!users.some(u => u.email === adminUser.email)) {
+    users.push(adminUser);
+    localStorage.setItem("users", JSON.stringify(users));
+}
 
 // Registration
 if (document.getElementById("registerForm")) {
@@ -68,7 +81,7 @@ if (document.getElementById("registerForm")) {
         localStorage.setItem("users", JSON.stringify(users));
 
         showSnackbar("Registration successful! Redirecting...", "success");
-        
+
         setTimeout(() => {
             window.location.href = "login.html";
         }, 1500);
@@ -86,8 +99,8 @@ if (document.getElementById("loginForm")) {
 
         // Basic Empty Check (HTML 'required' attribute handles this mostly, but good to have)
         if (!email || !password) {
-             showSnackbar("Please fill in all fields.", "error");
-             return;
+            showSnackbar("Please fill in all fields.", "error");
+            return;
         }
 
         let users = JSON.parse(localStorage.getItem("users")) || [];
