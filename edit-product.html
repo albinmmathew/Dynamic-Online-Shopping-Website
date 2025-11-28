@@ -51,6 +51,54 @@
 
 
     <!-- EDIT FORM -->
+    <div class="container mt-5">
+        <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+            <h3 class="text-center mb-3">Edit Product</h3>
+
+            <form id="editForm">
+
+                <!-- Name -->
+                <div class="form-floating mb-4">
+                    <input type="text" id="name" class="form-control" placeholder="Product Name" required />
+                    <label for="name">Product Name</label>
+                </div>
+
+                <!-- Category -->
+                <div class="mb-4">
+                    <label class="form-label" for="category">Category</label>
+                    <select class="form-select" id="category" required>
+                        <option value="" disabled selected>Select a Category</option>
+                        <option value="Guitars">Guitars</option>
+                        <option value="Pianos & Keys">Pianos & Keys</option>
+                        <option value="Drums">Drums</option>
+                        <option value="Wind Instruments">Wind Instruments</option>
+                        <option value="Accessories">Accessories</option>
+                    </select>
+                </div>
+
+                <!-- Price -->
+                <div class="form-floating mb-4">
+                    <input type="number" id="price" class="form-control" placeholder="Price" required />
+                    <label for="price">Price (₹)</label>
+                </div>
+
+                <!-- Description -->
+                <div class="form-floating mb-4">
+                    <textarea id="description" class="form-control" placeholder="Description" style="height: 100px"
+                        required></textarea>
+                    <label for="description">Description</label>
+                </div>
+
+                <!-- Image URL -->
+                <div class="form-floating mb-4">
+                    <input type="text" id="image" class="form-control" placeholder="Image URL" required />
+                    <label for="image">Image URL</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+            </form>
+        </div>
+    </div>
 
 
     <!-- MDB + Bootstrap JS -->
