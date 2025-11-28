@@ -1,3 +1,24 @@
+// Helper to show Snackbar
+function showSnackbar(message, type = "success") {
+    const snackbar = document.getElementById("snackbar");
+    const snackbarMessage = document.getElementById("snackbarMessage");
+    
+    // Set color based on type
+    if (type === "error") {
+        snackbar.classList.remove("bg-primary");
+        snackbar.classList.add("bg-danger");
+    } else {
+        snackbar.classList.remove("bg-danger");
+        snackbar.classList.add("bg-primary");
+    }
+
+    snackbarMessage.textContent = message;
+    
+    // Show toast using Bootstrap API
+    const toast = new bootstrap.Toast(snackbar);
+    toast.show();
+}
+
 // Get existing users or set empty array
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -11,26 +32,33 @@ if (document.getElementById("registerForm")) {
         let password = document.getElementById("password").value;
         let confirmPassword = document.getElementById("confirmPassword").value;
 
-        // Validation
+        // Email Validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showSnackbar("Please enter a valid email address.", "error");
+            return;
+        }
+
+        // Password Validation
         if (password.length < 6) {
-            alert("Password must be at least 6 characters long.");
+            showSnackbar("Password must be at least 6 characters long.", "error");
             return;
         }
 
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            showSnackbar("Passwords do not match!", "error");
             return;
         }
 
         // Check duplicate email
         let exists = users.some(u => u.email === email);
         if (exists) {
-            alert("Email already registered!");
+            showSnackbar("Email already registered!", "error");
             return;
         }
 
         let newUser = {
-            id: Date.now(),
+            id: users.length + 1, // Simple ID generation as per requirement example
             name,
             email,
             password
@@ -39,13 +67,13 @@ if (document.getElementById("registerForm")) {
         users.push(newUser);
         localStorage.setItem("users", JSON.stringify(users));
 
-        alert("Registration successful!");
-        window.location.href = "login.html";
+        showSnackbar("Registration successful! Redirecting...", "success");
+        
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1500);
     });
 }
-
-
-
 
 // LOGIN
 if (document.getElementById("loginForm")) {
@@ -56,24 +84,30 @@ if (document.getElementById("loginForm")) {
         let email = document.getElementById("loginEmail").value.trim();
         let password = document.getElementById("loginPassword").value;
 
+        // Basic Empty Check (HTML 'required' attribute handles this mostly, but good to have)
+        if (!email || !password) {
+             showSnackbar("Please fill in all fields.", "error");
+             return;
+        }
+
         let users = JSON.parse(localStorage.getItem("users")) || [];
 
         // Find matching user
         let validUser = users.find(u => u.email === email && u.password === password);
 
         if (!validUser) {
-			document.getElementById("loginError").innerHTML =
-				"Invalid email or password. <a href='register.html'>Create an account?</a>";
-			return;
-		}
-				
+            showSnackbar("Invalid credentials", "error");
+            return;
+        }
 
-        // Save login session
-        localStorage.setItem("loggedInUser", JSON.stringify(validUser));
+        // Save login session (Email only as per requirement)
+        localStorage.setItem("loggedInUser", email);
 
-        alert("Login successful!");
+        showSnackbar("Login successful! Redirecting...", "success");
 
         // Redirect to home page
-        window.location.href = "index.html";
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 1000);
     });
 }
