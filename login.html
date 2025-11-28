@@ -14,23 +14,46 @@
 
 <body class="bg-light">
 
-    <p class="text-center mt-3">
-        Don't have an account? <a href="register.html">Register</a>
-    </p>
-    </form>
-    </div>
+    <div class="container mt-5">
+        <div class="card shadow p-4 mx-auto" style="max-width: 450px;">
+            <h3 class="text-center mb-4">Login</h3>
 
-    <!-- Snackbar -->
-    <div id="snackbar" class="toast align-items-center text-white bg-primary border-0 position-fixed bottom-0 end-0 m-3"
-        role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body" id="snackbarMessage">
-                Hello, world! This is a toast message.
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                aria-label="Close"></button>
+            <form id="loginForm">
+
+                <!-- Email -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="loginEmail" class="form-control" required>
+                    <label class="form-label" for="loginEmail">Email</label>
+                </div>
+
+                <!-- Password -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="loginPassword" class="form-control" required>
+                    <label class="form-label" for="loginPassword">Password</label>
+                </div>
+
+                <p id="loginError" class="text-danger text-center fw-bold"></p>
+
+                <button class="btn btn-primary w-100" type="submit">Login</button>
+
+                <p class="text-center mt-3">
+                    Don't have an account? <a href="register.html">Register</a>
+                </p>
+            </form>
         </div>
-    </div>
+
+        <!-- Snackbar -->
+        <div id="snackbar"
+            class="toast align-items-center text-white bg-primary border-0 position-fixed bottom-0 end-0 m-3"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="snackbarMessage">
+                    Hello, world! This is a toast message.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
     </div>
 
     <!-- MDB + Bootstrap JS -->
