@@ -1,4 +1,4 @@
-# Dynamic Online Shopping Website
+# Octave Store - Online Music Shop
 
 A fully functional, dynamic online shopping website built with HTML, CSS (Bootstrap 5 + Material Design), and JavaScript. This project uses LocalStorage to simulate a backend database for user authentication, product management, and cart functionality.
 
