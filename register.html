@@ -21,28 +21,27 @@
             <form id="registerForm">
 
                 <!-- Name -->
-                <div class="form-floating mb-4">
-                    <input type="text" id="name" class="form-control" placeholder="Full Name" required />
-                    <label for="name">Full Name</label>
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="name" class="form-control" required />
+                    <label class="form-label" for="name">Full Name</label>
                 </div>
 
                 <!-- Email -->
-                <div class="form-floating mb-4">
-                    <input type="email" id="email" class="form-control" placeholder="name@example.com" required />
-                    <label for="email">Email</label>
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="email" class="form-control" required />
+                    <label class="form-label" for="email">Email</label>
                 </div>
 
                 <!-- Password -->
-                <div class="form-floating mb-4">
-                    <input type="password" id="password" class="form-control" placeholder="Password" required />
-                    <label for="password">Password (min 6 chars)</label>
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="password" class="form-control" required />
+                    <label class="form-label" for="password">Password (min 6 chars)</label>
                 </div>
 
                 <!-- Confirm Password -->
-                <div class="form-floating mb-4">
-                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password"
-                        required />
-                    <label for="confirmPassword">Confirm Password</label>
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="confirmPassword" class="form-control" required />
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
                 </div>
 
                 <button class="btn btn-primary w-100" type="submit">Register</button>
