@@ -22,7 +22,7 @@ function showSnackbar(message, type = "success") {
 // Get existing users or set empty array
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// Seed Admin User
+// Seed/Update Admin User
 const adminUser = {
     id: 0,
     name: "Admin",
@@ -30,10 +30,13 @@ const adminUser = {
     password: "admin123"
 };
 
-if (!users.some(u => u.email === adminUser.email)) {
-    users.push(adminUser);
-    localStorage.setItem("users", JSON.stringify(users));
-}
+// Remove existing admin if present (to ensure password update)
+users = users.filter(u => u.email !== adminUser.email);
+// Add admin back
+users.push(adminUser);
+localStorage.setItem("users", JSON.stringify(users));
+
+console.log("Admin user seeded/updated:", adminUser);
 
 // Registration
 if (document.getElementById("registerForm")) {
